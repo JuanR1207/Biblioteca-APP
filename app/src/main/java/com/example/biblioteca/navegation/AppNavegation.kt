@@ -7,6 +7,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
+import com.example.biblioteca.ui.screen.HomeScreen
 
 @Composable
 fun AppNavegacion() {
@@ -17,7 +18,9 @@ fun AppNavegacion() {
         startDestination = Routes.INICIO
     ) {
         composable(Routes.INICIO) {
-            Text("Pantalla: Inicio")
+            HomeScreen(
+                onVerLibros = { navController.navigate(Routes.LISTA_LIBROS) }
+            )
         }
 
         composable(Routes.LISTA_LIBROS) {
