@@ -1,4 +1,4 @@
-package com.example.biblioteca.navegacion
+package com.example.biblioteca.navegation
 
 import android.net.Uri
 

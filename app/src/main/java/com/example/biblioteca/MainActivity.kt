@@ -4,7 +4,7 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-import com.example.biblioteca.navegacion.AppNavegacion
+import com.example.biblioteca.navegation.AppNavegation
 import com.example.biblioteca.ui.theme.BibliotecaTheme
 
 class MainActivity : ComponentActivity() {
@@ -13,7 +13,7 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             BibliotecaTheme {
-                AppNavegacion()
+                AppNavegation()
             }
         }
     }
