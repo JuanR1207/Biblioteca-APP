@@ -1,4 +1,4 @@
-package com.example.biblioteca.navegacion
+package com.example.biblioteca.navegation
 
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -10,7 +10,7 @@ import androidx.navigation.navArgument
 import com.example.biblioteca.ui.screen.HomeScreen
 
 @Composable
-fun AppNavegacion() {
+fun AppNavegation() {
     val navController = rememberNavController()
 
     NavHost(
