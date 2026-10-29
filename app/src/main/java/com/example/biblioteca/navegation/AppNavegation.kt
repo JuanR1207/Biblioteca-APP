@@ -8,6 +8,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.example.biblioteca.ui.screen.HomeScreen
+import com.example.biblioteca.ui.screen.ListaLibrosScreen
 
 @Composable
 fun AppNavegation() {
@@ -24,7 +25,11 @@ fun AppNavegation() {
         }
 
         composable(Routes.LISTA_LIBROS) {
-            Text("Pantalla: Lista de libros")
+            ListaLibrosScreen(
+                onVerDetalle = { libroId ->
+                    navController.navigate(Routes.detalleLibro(libroId))
+                }
+            )
         }
 
         composable(
