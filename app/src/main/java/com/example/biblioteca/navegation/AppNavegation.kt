@@ -1,6 +1,5 @@
 package com.example.biblioteca.navegation
 
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
@@ -13,6 +12,7 @@ import com.example.biblioteca.ui.screen.DetalleReservaScreen
 import com.example.biblioteca.ui.screen.HomeScreen
 import com.example.biblioteca.ui.screen.ListaLibrosScreen
 import com.example.biblioteca.ui.screen.MisReservasScreen
+import com.example.biblioteca.ui.screen.RenovacionExitosaScreen
 import com.example.biblioteca.ui.screen.RenovarReservaScreen
 import com.example.biblioteca.ui.screen.ReservaCanceladaScreen
 
@@ -123,8 +123,15 @@ fun AppNavegation() {
         }
 
         composable(Routes.RENOVACION_EXITOSA) { backStackEntry ->
-            val fechaNueva = backStackEntry.arguments?.getString("fechaNueva")
-            Text("Pantalla: Renovación exitosa, nueva fecha $fechaNueva")
+            val nombreLibro = backStackEntry.arguments?.getString("nombreLibro") ?: ""
+            val fechaNueva = backStackEntry.arguments?.getString("fechaNueva") ?: ""
+            RenovacionExitosaScreen(
+                nombreLibro = nombreLibro,
+                fechaNueva = fechaNueva,
+                onVolverMisReservas = {
+                    navController.popBackStack(Routes.MIS_RESERVAS, inclusive = false)
+                }
+            )
         }
 
         composable(Routes.RESERVA_CANCELADA) {
