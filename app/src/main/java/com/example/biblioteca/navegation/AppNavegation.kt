@@ -13,6 +13,7 @@ import com.example.biblioteca.ui.screen.DetalleReservaScreen
 import com.example.biblioteca.ui.screen.HomeScreen
 import com.example.biblioteca.ui.screen.ListaLibrosScreen
 import com.example.biblioteca.ui.screen.MisReservasScreen
+import com.example.biblioteca.ui.screen.RenovarReservaScreen
 import com.example.biblioteca.ui.screen.ReservaCanceladaScreen
 
 @Composable
@@ -105,8 +106,20 @@ fun AppNavegation() {
         }
 
         composable(Routes.RENOVAR_RESERVA) { backStackEntry ->
-            val codigo = backStackEntry.arguments?.getString("codigoReserva")
-            Text("Pantalla: Renovar reserva $codigo")
+            val nombreLibro = backStackEntry.arguments?.getString("nombreLibro") ?: ""
+            val fechaReserva = backStackEntry.arguments?.getString("fechaReserva") ?: ""
+            RenovarReservaScreen(
+                nombreLibro = nombreLibro,
+                fechaReserva = fechaReserva,
+                onConfirmar = { fechaNueva ->
+                    navController.navigate(
+                        Routes.renovacionExitosa(nombreLibro, fechaNueva)
+                    ) {
+                        popUpTo(Routes.MIS_RESERVAS)
+                    }
+                },
+                onVolver = { navController.popBackStack() }
+            )
         }
 
         composable(Routes.RENOVACION_EXITOSA) { backStackEntry ->
