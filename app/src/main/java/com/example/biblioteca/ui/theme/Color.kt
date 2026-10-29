@@ -19,3 +19,7 @@ val NaranjaClaro = Color(0xFFFFF1E6)
 val VerdeExito = Color(0xFF2E9E4F)
 
 val VerdeClaro = Color(0xFFE8F6EC)
+
+val RojoCancelar = Color(0xFFE53935)
+
+val RojoClaro = Color(0xFFFDECEA)

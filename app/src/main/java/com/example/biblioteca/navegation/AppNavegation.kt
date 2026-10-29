@@ -1,9 +1,7 @@
 package com.example.biblioteca.navegation
 
-import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -11,9 +9,11 @@ import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.example.biblioteca.ui.screen.ConfirmacionReservaScreen
 import com.example.biblioteca.ui.screen.DetalleLibroScreen
+import com.example.biblioteca.ui.screen.DetalleReservaScreen
 import com.example.biblioteca.ui.screen.HomeScreen
 import com.example.biblioteca.ui.screen.ListaLibrosScreen
 import com.example.biblioteca.ui.screen.MisReservasScreen
+import com.example.biblioteca.ui.screen.ReservaCanceladaScreen
 
 @Composable
 fun AppNavegation() {
@@ -83,12 +83,24 @@ fun AppNavegation() {
         }
 
         composable(Routes.DETALLE_RESERVA) { backStackEntry ->
-            val nombreLibro = backStackEntry.arguments?.getString("nombreLibro")
-            val fechaReserva = backStackEntry.arguments?.getString("fechaReserva")
-            val codigoReserva = backStackEntry.arguments?.getString("codigoReserva")
-            Text(
-                text = "Detalle de reserva: $nombreLibro, $fechaReserva, $codigoReserva",
-                modifier = Modifier.statusBarsPadding()
+            val nombreLibro = backStackEntry.arguments?.getString("nombreLibro") ?: ""
+            val fechaReserva = backStackEntry.arguments?.getString("fechaReserva") ?: ""
+            val codigoReserva = backStackEntry.arguments?.getString("codigoReserva") ?: ""
+            DetalleReservaScreen(
+                nombreLibro = nombreLibro,
+                fechaReserva = fechaReserva,
+                codigoReserva = codigoReserva,
+                onRenovar = {
+                    navController.navigate(
+                        Routes.renovarReserva(nombreLibro, fechaReserva, codigoReserva)
+                    )
+                },
+                onCancelar = {
+                    navController.navigate(Routes.RESERVA_CANCELADA) {
+                        popUpTo(Routes.MIS_RESERVAS)
+                    }
+                },
+                onVolver = { navController.popBackStack() }
             )
         }
 
@@ -103,7 +115,9 @@ fun AppNavegation() {
         }
 
         composable(Routes.RESERVA_CANCELADA) {
-            Text("Pantalla: Reserva cancelada")
+            ReservaCanceladaScreen(
+                onVolverMisReservas = { navController.popBackStack() }
+            )
         }
     }
 }

@@ -1,6 +1,7 @@
 package com.example.biblioteca.data
 
 object DatosEstaticos {
+
     const val FECHA_RESERVA = "15/06/2026"
 
     val libros = listOf(
@@ -45,4 +46,6 @@ object DatosEstaticos {
     )
 
     fun buscarLibro(id: Int): Libro? = libros.find { it.id == id }
+
+    fun buscarReserva(codigo: String): Reserva? = reservas.find { it.codigo == codigo }
 }

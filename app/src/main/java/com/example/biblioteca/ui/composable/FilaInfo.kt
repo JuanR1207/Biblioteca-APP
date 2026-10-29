@@ -9,6 +9,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
@@ -17,7 +18,8 @@ fun FilaInfo(
     etiqueta: String,
     valor: String,
     modifier: Modifier = Modifier,
-    colorValor: Color = Color.Unspecified
+    colorValor: Color = Color.Unspecified,
+    anchoEtiqueta: Dp = 96.dp
 ) {
     Row(
         modifier = modifier
@@ -28,7 +30,7 @@ fun FilaInfo(
             text = "$etiqueta:",
             fontSize = 15.sp,
             fontWeight = FontWeight.SemiBold,
-            modifier = Modifier.width(96.dp)
+            modifier = Modifier.width(anchoEtiqueta)
         )
         Text(
             text = valor,
