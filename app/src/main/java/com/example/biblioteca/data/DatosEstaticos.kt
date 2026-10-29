@@ -1,6 +1,7 @@
 package com.example.biblioteca.data
 
 object DatosEstaticos {
+    const val FECHA_RESERVA = "15/06/2026"
 
     val libros = listOf(
         Libro(

@@ -15,3 +15,7 @@ val MoradoClaro = Color(0xFFE9E5FA)
 val NaranjaPrimario = Color(0xFFF57C1F)
 
 val NaranjaClaro = Color(0xFFFFF1E6)
+
+val VerdeExito = Color(0xFF2E9E4F)
+
+val VerdeClaro = Color(0xFFE8F6EC)
