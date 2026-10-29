@@ -7,6 +7,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
+import com.example.biblioteca.ui.screen.DetalleLibroScreen
 import com.example.biblioteca.ui.screen.HomeScreen
 import com.example.biblioteca.ui.screen.ListaLibrosScreen
 
@@ -36,8 +37,11 @@ fun AppNavegation() {
             route = Routes.DETALLE_LIBRO,
             arguments = listOf(navArgument("libroId") { type = NavType.IntType })
         ) { backStackEntry ->
-            val libroId = backStackEntry.arguments?.getInt("libroId")
-            Text("Pantalla: Detalle del libro $libroId")
+            val libroId = backStackEntry.arguments?.getInt("libroId") ?: 0
+            DetalleLibroScreen(
+                libroId = libroId,
+                onReservar = { navController.navigate(Routes.confirmacion(libroId)) }
+            )
         }
 
         composable(
