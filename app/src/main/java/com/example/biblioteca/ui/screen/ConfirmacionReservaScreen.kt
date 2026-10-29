@@ -1,5 +1,6 @@
 package com.example.biblioteca.ui.screen
 
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -18,6 +19,7 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -36,7 +38,8 @@ import com.example.biblioteca.ui.theme.VerdeExito
 @Composable
 fun ConfirmacionReservaScreen(
     libroId: Int,
-    onVolverInicio: () -> Unit
+    onVolverInicio: () -> Unit,
+    onVerMisReservas: () -> Unit
 ) {
     val libro = DatosEstaticos.buscarLibro(libroId)
     val nombreLibro = libro?.nombre ?: "Libro desconocido"
@@ -103,6 +106,24 @@ fun ConfirmacionReservaScreen(
                 fontWeight = FontWeight.SemiBold
             )
         }
+
+        Spacer(modifier = Modifier.height(12.dp))
+
+        OutlinedButton(
+            onClick = onVerMisReservas,
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(52.dp),
+            shape = RoundedCornerShape(12.dp),
+            border = BorderStroke(1.dp, VerdeExito)
+        ) {
+            Text(
+                text = "📋  Ver Mis Reservas",
+                fontSize = 16.sp,
+                fontWeight = FontWeight.SemiBold,
+                color = VerdeExito
+            )
+        }
     }
 }
 
@@ -110,6 +131,10 @@ fun ConfirmacionReservaScreen(
 @Composable
 fun ConfirmacionReservaScreenPreview() {
     BibliotecaTheme {
-        ConfirmacionReservaScreen(libroId = 1, onVolverInicio = {})
+        ConfirmacionReservaScreen(
+            libroId = 1,
+            onVolverInicio = {},
+            onVerMisReservas = {}
+        )
     }
 }

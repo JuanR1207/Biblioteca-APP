@@ -1,7 +1,9 @@
 package com.example.biblioteca.navegation
 
+import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -11,6 +13,7 @@ import com.example.biblioteca.ui.screen.ConfirmacionReservaScreen
 import com.example.biblioteca.ui.screen.DetalleLibroScreen
 import com.example.biblioteca.ui.screen.HomeScreen
 import com.example.biblioteca.ui.screen.ListaLibrosScreen
+import com.example.biblioteca.ui.screen.MisReservasScreen
 
 @Composable
 fun AppNavegation() {
@@ -56,17 +59,37 @@ fun AppNavegation() {
                     navController.navigate(Routes.INICIO) {
                         popUpTo(Routes.INICIO) { inclusive = true }
                     }
+                },
+                onVerMisReservas = {
+                    navController.navigate(Routes.MIS_RESERVAS) {
+                        popUpTo(Routes.INICIO)
+                    }
                 }
             )
         }
 
         composable(Routes.MIS_RESERVAS) {
-            Text("Pantalla: Mis reservas")
+            MisReservasScreen(
+                onVerReserva = { reserva ->
+                    navController.navigate(
+                        Routes.detalleReserva(
+                            nombreLibro = reserva.nombreLibro,
+                            fechaReserva = reserva.fecha,
+                            codigoReserva = reserva.codigo
+                        )
+                    )
+                }
+            )
         }
 
         composable(Routes.DETALLE_RESERVA) { backStackEntry ->
-            val codigo = backStackEntry.arguments?.getString("codigoReserva")
-            Text("Pantalla: Detalle de reserva $codigo")
+            val nombreLibro = backStackEntry.arguments?.getString("nombreLibro")
+            val fechaReserva = backStackEntry.arguments?.getString("fechaReserva")
+            val codigoReserva = backStackEntry.arguments?.getString("codigoReserva")
+            Text(
+                text = "Detalle de reserva: $nombreLibro, $fechaReserva, $codigoReserva",
+                modifier = Modifier.statusBarsPadding()
+            )
         }
 
         composable(Routes.RENOVAR_RESERVA) { backStackEntry ->
