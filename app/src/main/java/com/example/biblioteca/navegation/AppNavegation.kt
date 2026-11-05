@@ -1,11 +1,15 @@
 package com.example.biblioteca.navegation
 
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateListOf
+import androidx.compose.runtime.remember
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
+import com.example.biblioteca.data.DatosEstaticos
+import com.example.biblioteca.data.Reserva
 import com.example.biblioteca.ui.screen.ConfirmacionReservaScreen
 import com.example.biblioteca.ui.screen.DetalleLibroScreen
 import com.example.biblioteca.ui.screen.DetalleReservaScreen
@@ -19,6 +23,9 @@ import com.example.biblioteca.ui.screen.ReservaCanceladaScreen
 @Composable
 fun AppNavegation() {
     val navController = rememberNavController()
+
+    // Lista de reservas que vive aquí para que no se borre al cambiar de pantalla
+    val reservas = remember { mutableStateListOf<Reserva>() }
 
     NavHost(
         navController = navController,
@@ -45,7 +52,21 @@ fun AppNavegation() {
             val libroId = backStackEntry.arguments?.getInt("libroId") ?: 0
             DetalleLibroScreen(
                 libroId = libroId,
-                onReservar = { navController.navigate(Routes.confirmacion(libroId)) }
+                onReservar = {
+                    val libro = DatosEstaticos.buscarLibro(libroId)
+                    if (libro != null) {
+                        reservas.add(
+                            Reserva(
+                                codigo = "RES-2026-%03d".format(reservas.size + 1),
+                                nombreLibro = libro.nombre,
+                                autor = libro.autor,
+                                fecha = DatosEstaticos.FECHA_RESERVA,
+                                estado = "Activa"
+                            )
+                        )
+                    }
+                    navController.navigate(Routes.confirmacion(libroId))
+                }
             )
         }
 
@@ -71,6 +92,7 @@ fun AppNavegation() {
 
         composable(Routes.MIS_RESERVAS) {
             MisReservasScreen(
+                reservas = reservas,
                 onVerReserva = { reserva ->
                     navController.navigate(
                         Routes.detalleReserva(

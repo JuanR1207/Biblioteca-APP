@@ -29,7 +29,10 @@ import com.example.biblioteca.ui.theme.MoradoClaro
 import com.example.biblioteca.ui.theme.MoradoPrimario
 
 @Composable
-fun MisReservasScreen(onVerReserva: (Reserva) -> Unit) {
+fun MisReservasScreen(
+    reservas: List<Reserva>,
+    onVerReserva: (Reserva) -> Unit
+) {
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -64,7 +67,7 @@ fun MisReservasScreen(onVerReserva: (Reserva) -> Unit) {
         Spacer(modifier = Modifier.height(12.dp))
 
         ListaReservasSection(
-            reservas = DatosEstaticos.reservas,
+            reservas = reservas,
             onVerReserva = onVerReserva,
             modifier = Modifier.weight(1f)
         )
@@ -90,6 +93,9 @@ fun MisReservasScreen(onVerReserva: (Reserva) -> Unit) {
 @Composable
 fun MisReservasScreenPreview() {
     BibliotecaTheme {
-        MisReservasScreen(onVerReserva = {})
+        MisReservasScreen(
+            reservas = DatosEstaticos.reservas,
+            onVerReserva = {}
+        )
     }
 }
