@@ -9,3 +9,17 @@ val Pink80 = Color(0xFFEFB8C8)
 val Purple40 = Color(0xFF6650a4)
 val PurpleGrey40 = Color(0xFF625b71)
 val Pink40 = Color(0xFF7D5260)
+val MoradoPrimario = Color(0xFF5B3FD0)
+val MoradoClaro = Color(0xFFE9E5FA)
+
+val NaranjaPrimario = Color(0xFFF57C1F)
+
+val NaranjaClaro = Color(0xFFFFF1E6)
+
+val VerdeExito = Color(0xFF2E9E4F)
+
+val VerdeClaro = Color(0xFFE8F6EC)
+
+val RojoCancelar = Color(0xFFE53935)
+
+val RojoClaro = Color(0xFFFDECEA)
