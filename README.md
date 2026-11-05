@@ -69,6 +69,7 @@ screen  →  section  →  composable
 ## Cómo funciona la navegación
 
 `Routes.kt` guarda los nombres de las rutas y `AppNavegation.kt` dice qué pantalla va en cada una. Las pantallas no conocen el `NavController`: solo reciben funciones como `onVerLibros` o `onRenovar` y las ejecutan cuando el usuario toca un botón. Quien decide a dónde ir es `AppNavegation`. Así las pantallas se pueden ver en el `@Preview` sin necesitar la navegación.
+La lista de reservas se guarda como estado en `AppNavegation` (con `mutableStateListOf`), para que no se borre al cambiar de pantalla. `MisReservasScreen` la recibe por parámetro.
 
 ## Flujo de trabajo en Git
 
@@ -86,10 +87,10 @@ Cada feature sigue el mismo ciclo: `pull` de `develop`, crear la rama, hacer el 
 
 ## Cosas que quedaron pendientes
 
-- Los datos son estáticos, así que cancelar o renovar una reserva no cambia la lista de Mis reservas.
-- Las etiquetas "Parámetro recibido" y "Argumentos recibidos" están a propósito, porque salen en el diseño de la práctica.
-
-## Tecnologías
+- Los datos de los libros son estáticos. Al reservar un libro se agrega una reserva nueva a Mis reservas, pero la lista vive solo mientras la app está abierta (no hay base de datos).
+- Cancelar o renovar una reserva todavía no cambia la lista de Mis reservas.
+- Si se reserva el mismo libro dos veces, aparece dos veces.
+- Las etiquetas "Parámetro recibido" y "Argumentos recibidos" están a propósito, porque salen en el diseño de la práctica.## Tecnologías
 
 Kotlin, Jetpack Compose, Material 3, Navigation Compose, Android Studio, Git y GitHub.
 
