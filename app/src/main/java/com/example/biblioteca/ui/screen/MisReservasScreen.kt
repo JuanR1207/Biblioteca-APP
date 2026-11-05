@@ -1,6 +1,5 @@
 package com.example.biblioteca.ui.screen
 
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -11,8 +10,6 @@ import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
@@ -26,7 +23,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.biblioteca.data.DatosEstaticos
 import com.example.biblioteca.data.Reserva
-import com.example.biblioteca.ui.composable.ReservaItem
+import com.example.biblioteca.ui.section.ListaReservasSection
 import com.example.biblioteca.ui.theme.BibliotecaTheme
 import com.example.biblioteca.ui.theme.MoradoClaro
 import com.example.biblioteca.ui.theme.MoradoPrimario
@@ -66,17 +63,11 @@ fun MisReservasScreen(onVerReserva: (Reserva) -> Unit) {
 
         Spacer(modifier = Modifier.height(12.dp))
 
-        LazyColumn(
-            modifier = Modifier.weight(1f),
-            verticalArrangement = Arrangement.spacedBy(12.dp)
-        ) {
-            items(DatosEstaticos.reservas) { reserva ->
-                ReservaItem(
-                    reserva = reserva,
-                    onVerReserva = { onVerReserva(reserva) }
-                )
-            }
-        }
+        ListaReservasSection(
+            reservas = DatosEstaticos.reservas,
+            onVerReserva = onVerReserva,
+            modifier = Modifier.weight(1f)
+        )
 
         Spacer(modifier = Modifier.height(12.dp))
 

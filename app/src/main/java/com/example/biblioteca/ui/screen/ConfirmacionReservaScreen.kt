@@ -17,8 +17,6 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
-import androidx.compose.material3.Card
-import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -30,7 +28,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.biblioteca.data.DatosEstaticos
-import com.example.biblioteca.ui.composable.FilaInfo
+import com.example.biblioteca.ui.section.ResumenReservaSection
 import com.example.biblioteca.ui.theme.BibliotecaTheme
 import com.example.biblioteca.ui.theme.VerdeClaro
 import com.example.biblioteca.ui.theme.VerdeExito
@@ -79,16 +77,10 @@ fun ConfirmacionReservaScreen(
 
         Spacer(modifier = Modifier.height(24.dp))
 
-        Card(
-            modifier = Modifier.fillMaxWidth(),
-            shape = RoundedCornerShape(16.dp),
-            colors = CardDefaults.cardColors(containerColor = Color.White)
-        ) {
-            Column(modifier = Modifier.padding(20.dp)) {
-                FilaInfo(etiqueta = "Libro", valor = nombreLibro)
-                FilaInfo(etiqueta = "Fecha", valor = DatosEstaticos.FECHA_RESERVA)
-            }
-        }
+        ResumenReservaSection(
+            nombreLibro = nombreLibro,
+            fecha = DatosEstaticos.FECHA_RESERVA
+        )
 
         Spacer(modifier = Modifier.height(40.dp))
 
